@@ -123,6 +123,18 @@ utan Docker, ghcr.io och SSH. Det finns ingen server att logga in på.
 Står det `Deploy from a branch` kommer workflowet att köra grönt men ingenting
 publiceras. Ett tyst fel som är lätt att missa.
 
+> **Repot måste vara publikt.** GitHub Pages för *privata* repon kräver en betald
+> plan (Pro/Team/Enterprise). På ett gratiskonto misslyckas deployen med:
+>
+> ```
+> Error: Failed to create deployment (status: 404)
+> Ensure GitHub Pages has been enabled
+> ```
+>
+> och `Settings → Pages` svarar `Your current plan does not support GitHub Pages
+> for this repository`. Lösningen är att göra repot publikt:
+> Settings → General → Danger Zone → Change repository visibility.
+
 ### 4. VITE_API_URL som repository variable
 
 > Settings → Secrets and variables → Actions → fliken **Variables** → New repository variable
@@ -222,6 +234,7 @@ app.use(cors({ origin: 'https://jsramverk-ht26.github.io' }));
 | Symptom | Trolig orsak |
 |---------|--------------|
 | Vit sida, 404 på `/assets/...` i konsolen | `base` saknas eller fel i `vite.config.js` |
+| `Failed to create deployment (status: 404)` | Pages ej aktiverat — **eller repot är privat** på ett gratiskonto |
 | Workflow grönt men sidan uppdateras inte | Pages Source står på `Deploy from a branch` istället för `GitHub Actions` |
 | `blocked by CORS policy` | Backend saknar `cors`-middleware |
 | Anropen går till `localhost:3000` i produktion | `VITE_API_URL` är inte satt som repository variable |
