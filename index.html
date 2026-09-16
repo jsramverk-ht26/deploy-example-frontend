@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kurskatalog — deploy-example-frontend</title>
+
+    <!--
+      SPA-routing på GitHub Pages, del 2 av 2.
+
+      public/404.html fångar upp direktlänkar (t.ex. /courses/abc123), kodar
+      sökvägen till en query-sträng och skickar användaren till index.html.
+      Snutten nedan packar upp den igen och skriver tillbaka riktig URL innan
+      React startar — så att react-router ser rätt sökväg.
+
+      Se README, avsnitt "Djuplänkar ger 404".
+    -->
+    <script>
+      (function () {
+        var redirect = new URLSearchParams(window.location.search).get('p')
+        if (redirect) {
+          history.replaceState(null, '', redirect)
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Verifierar att bygget går igenom på varje push och PR — motsvarigheten
+      # till "bygg Docker-imagen" i backend-repots ci.yml.
+      - name: Verifiera att bygget fungerar
+        run: npm run build
+
+  # TODO vecka 4 — frontend-tester krävs inte i gruppuppgiften (krav 5 gäller
+  # bara backend), men vill ni testa er frontend finns exempel i repot
+  # react-jsramverk-testing (Vitest + Testing Library + Cypress).
+  #
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 22
+  #     - run: npm ci
+  #     - run: npm test

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Omdirigerar…</title>
+    <!--
+      SPA-routing på GitHub Pages, del 1 av 2.
+
+      Pages är en statisk filserver. En direktlänk till /deploy-example-frontend/courses/abc123
+      letar efter en fil på den sökvägen, hittar ingen, och serverar den här 404-sidan.
+
+      Vi utnyttjar det: istället för att visa ett felmeddelande kodar vi den
+      efterfrågade sökvägen till ?p=... och skickar användaren till index.html,
+      där snutten i <head> packar upp den igen och låter react-router ta över.
+
+      Enklare alternativ: byt BrowserRouter mot HashRouter i src/main.jsx.
+      Då blir URL:erna /#/courses/abc123 och den här filen behövs inte alls.
+    -->
+    <script>
+      (function () {
+        // Reponamnet — måste matcha `base` i vite.config.js
+        var repo = '/deploy-example-frontend'
+        var path = window.location.pathname.slice(repo.length)
+        window.location.replace(
+          repo + '/?p=' + encodeURIComponent(repo + path + window.location.search)
+        )
+      })()
+    </script>
+  </head>
+  <body></body>
+</html>
