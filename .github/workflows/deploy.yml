@@ -2,7 +2,16 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    # Under projektet (vecka 6-10) arbetar ni i en dev-branch. Utan dev här
+    # skulle den driftsatta sidan stå kvar på vecka 5-koden hela projektet,
+    # eftersom inget mergas till main förrän vid inlämningen.
+    #
+    #   dev  = det som körs och demonstreras under projektet
+    #   main = den släppta versionen
+    #
+    # Obs: Pages har bara EN publicerad version. Pushar ni till båda brancherna
+    # är det den senaste deployen som ligger uppe.
+    branches: [main, dev]
 
   # Gör att workflowet kan köras manuellt från Actions-fliken
   workflow_dispatch:
