@@ -44,11 +44,22 @@ Med tom `VITE_API_URL` går alla `/api`-anrop via Vites proxy till
 `http://localhost:3000` — alltså er lokalt körande backend. Webbläsaren ser
 dem som samma origin, så CORS blir aldrig ett problem lokalt.
 
-Vill ni istället använda den driftsatta backenden, sätt i `.env`:
+### Utveckla mot en driftsatt backend
 
+Kör ni ingen backend lokalt kan ni peka **proxyn** på den driftsatta i stället:
+
+```bash
+DEV_API_PROXY=https://dv1677-<er-vps>.nplab.bth.se npm run dev
 ```
-VITE_API_URL=https://dv1677-picard.nplab.bth.se
-```
+
+Anropen går fortfarande till `/api/...` relativt, via proxyn. Webbläsaren ser
+en enda origin och CORS är fortfarande inget problem.
+
+> ⚠️ **Sätt inte `VITE_API_URL` när ni kör `npm run dev`.** Vite plockar upp
+> allt som börjar med `VITE_` ur miljön — även från kommandoraden — och bakar in
+> det i klienten. Då blir `BASE_URL` i `api.js` absolut, anropet går **förbi**
+> proxyn, och ni får CORS-felet redan lokalt. `VITE_API_URL` hör hemma i
+> **bygget** (`npm run build`), inte i dev-servern.
 
 ---
 
