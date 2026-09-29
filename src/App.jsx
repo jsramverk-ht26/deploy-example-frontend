@@ -7,7 +7,7 @@ export default function App() {
     <div className="app">
       <header>
         <h1>
-          <Link to="/">Kurskatalog</Link>
+          <Link to="/">Hejsan svejsan</Link>
         </h1>
         <p className="sub">
           React + Vite på GitHub Pages — data från <code>deploy-example-backend</code>
