@@ -46,7 +46,14 @@ dem som samma origin, så CORS blir aldrig ett problem lokalt.
 
 ### Utveckla mot en driftsatt backend
 
-Kör ni ingen backend lokalt kan ni peka **proxyn** på den driftsatta i stället:
+Kör ni ingen backend lokalt kan ni peka **proxyn** på den driftsatta i stället.
+Sätt den i `.env`:
+
+```
+DEV_API_PROXY=https://dv1677-<er-vps>.nplab.bth.se
+```
+
+…eller som prefix på kommandoraden, om ni bara vill testa en gång:
 
 ```bash
 DEV_API_PROXY=https://dv1677-<er-vps>.nplab.bth.se npm run dev
